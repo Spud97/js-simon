@@ -2,7 +2,7 @@ let numeriDaRicordare = [];
 let numeriUtente = [];
 let numeriIndovinati = [];
 const listaNumeri = document.getElementById("box");
-let secondi = 3; // da impostare a 30!!!
+let secondi = 30;
 
 function generateRandomNumbers(min, max) {
   if (min === undefined || min === null || min < 0) {
@@ -20,7 +20,9 @@ function generateRandomNumbers(min, max) {
 
 while (numeriDaRicordare.length < 5) {
   result = generateRandomNumbers(1, 99);
-  numeriDaRicordare.push(result);
+  if (!numeriDaRicordare.includes(result)) {
+    numeriDaRicordare.push(result);
+  }
 }
 
 console.log(numeriDaRicordare);
@@ -37,23 +39,21 @@ const timerSecondi = setInterval(function () {
 }, 1000);
 
 function askNumbers() {
-  for (i = 0; i < 5; i++) {
+  while (numeriUtente.length < 5) {
     let answer = prompt("Inserisci i numeri uno alla volta.");
+    let answerN = parseInt(answer);
 
     // NON FUNZIONA!!!!!
-    if (answer === isNaN || answer > 99 || answer < 0) {
-      alert("Quello non è un numero!");
-      return;
+    if ((answer === NaN || answer > 99 || answer < 0)) {
+      alert("Quello non è un numero valido!");
+    } else {
+      numeriUtente.push(answerN);
     }
-
-    answerN = parseInt(answer);
-    numeriUtente.push(answerN);
   }
-
   console.log(numeriUtente);
 }
 
-setTimeout(askNumbers, 3100);
+setTimeout(askNumbers, 30100);
 
 function controllo() {
   for (i = 0; i < numeriUtente.length; i++) {
@@ -63,7 +63,12 @@ function controllo() {
   }
 
   console.log(numeriIndovinati);
-  alert("Hai ricordato " + numeriIndovinati.length + " numeri e sono i seguenti: " + numeriIndovinati);
+  alert(
+    "Hai ricordato " +
+      numeriIndovinati.length +
+      " numeri e sono i seguenti: " +
+      numeriIndovinati
+  );
 }
 
-setTimeout(controllo, 4000);
+setTimeout(controllo, 31000);
